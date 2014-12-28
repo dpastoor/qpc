@@ -1,0 +1,17 @@
+Package: qpc
+Type: Package
+Title: To perform quantitative predictive checks
+Version: 0.0.0
+Date: 2014-12-28
+Authors@R: c(
+    person("Devin", "Pastoor",
+    email = "devin.pastoor@gmail.com", role = c("aut", "cre")))
+Description: TODO
+Depends:
+    R (>= 3.0.2)
+Imports:
+    ggplot2,
+    PKPDmisc,
+    dplyr,
+    lazyeval
+License: MIT
