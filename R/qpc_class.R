@@ -42,21 +42,6 @@ simdata.qpc <- function(x) x[['simdata']]
   return(x)
 }
 
-pauc <- function(x){
-  UseMethod("pauc", x)
-}
-
-pauc.qpc <- function(x) x[['pauc']]
-
-'pauc<-' <- function(x, value) {
-  UseMethod('pauc<-', x)
-}
-
-'pauc<-.qpc' <- function(x, value) {
-  x[['pauc']] <- value
-  return(x)
-}
-
 
 tests <- function(x) {
   UseMethod("tests", x)
