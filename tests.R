@@ -12,11 +12,16 @@ sd_oral_richpk %>% s_quantiles("Conc", probs = c(0.1, 0.5))
 qpc2 <- qpc(rdata = sd_oral_richpk, simdata = sd_oral_richpk %>% 
 mutate(REP = ifelse(Gender =="Male", 1, 2)))
 
-summarize_quantiles(qpc2,"Conc",rep_col_name = "REP", probs = c(0.75))
-summarize_quantiles(qpc2,"Conc",rep_col_name = "REP", probs = c(0.5, 0.75))
-summarize_quantiles(qpc2,"Conc",rep_col_name = "REP", probs = c(0.25, 0.5, 0.75))
+summarize_quantiles(qpc2, rdv ="Conc", rep="REP", probs = c(0.75))
+summarize_quantiles(qpc2,"Conc", rep="REP", probs = c(0.5, 0.75))
+summarize_quantiles(qpc2,"Conc", rep="REP", probs = c(0.25, 0.5, 0.75))
 
-str(qpc2$rdata)
+pauc(qpc2) <- list(c(0, 8), c(0, 24))
+
+qpc2 <- calculate_paucs(qpc2, "Time", "Conc", id = "ID", rep = "REP")
+
+head(qpc2$rdata_pauc)
+head(qpc2$simdata_pauc)
 
 
 grp <- function(df, gp) {
