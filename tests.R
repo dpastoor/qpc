@@ -12,10 +12,6 @@ sd_oral_richpk %>% s_quantiles("Conc", probs = c(0.1, 0.5))
 qpc2 <- qpc(rdata = sd_oral_richpk, simdata = sd_oral_richpk %>% 
 mutate(REP = ifelse(Gender =="Male", 1, 2)))
 
-summarize_quantiles(qpc2, rdv ="Conc", rep="REP", probs = c(0.75))
-summarize_quantiles(qpc2,"Conc", rep="REP", probs = c(0.5, 0.75))
-summarize_quantiles(qpc2,"Conc", rep="REP", probs = c(0.25, 0.5, 0.75))
-
 pauc(qpc2) <- list(c(0, 8), c(0, 24))
 
 qpc2 <- calculate_paucs(qpc2, "Time", "Conc", id = "ID", rep = "REP")
@@ -23,7 +19,13 @@ qpc2 <- calculate_paucs(qpc2, "Time", "Conc", id = "ID", rep = "REP")
 head(qpc2$rdata_pauc)
 head(qpc2$simdata_pauc)
 
+qpc3 <- calculate_quantiles(qpc2, probs = c(0.25, 0.5, 0.75))
+qpc3$r_pauc_quantiles
+qpc3$s_pauc_quantiles
 
+#still need to test/properly check for pauc being added but the pauc not calculated
+# before a quantile is requested
+# determine when to dispatch the calculate_pauc function
 grp <- function(df, gp) {
   df %>% group_by_(.dots = list(lazyeval::interp(gp, as.name(gp))))
 }
