@@ -22,6 +22,7 @@ pauc.qpc <- function(x) x[['pauc']]
     warning("For more than one pauc, must be a list, coercing to list.")
     value <- as.list(value)
   }
+  if(is.null(x[['pauc']])) x[['pauc']] <- list()
   x[['pauc']] <- c(x[['pauc']], value)
   return(x)
 }
