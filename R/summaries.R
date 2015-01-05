@@ -1,3 +1,4 @@
+#' @export
 calculate_paucs <- function(x,
                             rdv_time,
                             rdv,
@@ -37,6 +38,7 @@ calculate_paucs.qpc <- function(x,
     return(x)
 }
 
+#' @export
 calculate_quantiles <- function(x, 
                         probs, 
                         rep="REP",
@@ -48,6 +50,7 @@ calculate_quantiles <- function(x,
 #' @param x qpc object
 #' @param probs probabilities for which quantiles to calculate (eg 0.75 for 75th percentile)
 #' @param rep column name for replicates in simulated data
+#' @export
 #' @examples
 #' \dontrun{
 #' calculate_quantiles(qpcdb, probs = c(0.25, 0.5, 0.75))
@@ -59,7 +62,7 @@ calculate_quantiles.qpc <- function(x,
   if(is.null(x$rdata) | is.null(x$simdata)) {
     stop("qpc object must have both real and simulated data defined")
   }
-  if(is.null(x$pauc) && is.null(x$tp)) {
+  if(is.null(x$pauc)) {
     stop("please define at least one pauc or tp to calculate quantiles")
   }
   
@@ -69,7 +72,7 @@ calculate_quantiles.qpc <- function(x,
     for(i in seq_along(pauc_cols)) {
       pauc_name <- pauc_cols[i]
       # ungroup to make sure no grouping vars passed in
-      x[['r_pauc_quantiles']][[pauc_name]] <- PKPDmisc::s_quantiles(ungroup(x$rdata_pauc), 
+      x[['r_pauc_quantiles']][[pauc_name]] <- PKPDmisc::s_quantiles(dplyr::ungroup(x$rdata_pauc), 
                                                                   pauc_name, 
                                                                   probs, 
                                                                   na.rm)

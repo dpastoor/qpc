@@ -1,3 +1,4 @@
+#' @export
 plot <- function(x) {
   UseMethod("plot",x)
 }
@@ -5,8 +6,8 @@ plot <- function(x) {
 #' plot 
 #' @export
 plot.qpc <- function(x) {
-  rdata_quantiles <- qpc$r_pauc_quantiles
-  sdata_quantiles <- qpc$s_pauc_quantiles
+  rdata_quantiles <- x$r_pauc_quantiles
+  sdata_quantiles <- x$s_pauc_quantiles
   
   library(ggplot2)
   for(i in seq_along(rdata_quantiles)) {
@@ -16,10 +17,10 @@ plot.qpc <- function(x) {
     
     summary <- dplyr::inner_join(gather(sq1[[1]], key, value, -REP), rvalue)
     p <- summary %>% ggplot(aes(x = value, group = key)) +geom_histogram(color = "black", fill="white") +
-      facet_wrap(~key, scales="free") + base_theme_obs() + geom_vline(aes(xintercept = rvalue), color = "red", size = 2) +
+      facet_wrap(~key, scales="free") + PKPDmisc::base_theme_obs() + geom_vline(aes(xintercept = rvalue), color = "red", size = 2) +
       xlab(names(rq1))
     print(p)
-
+    return(p)
   }
   
 }

@@ -1,3 +1,4 @@
+#' @export
 qpc <- function(rdata = NULL, 
                 simdata = NULL, 
                 pauc = NULL, 

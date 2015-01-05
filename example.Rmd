@@ -1,0 +1,29 @@
+---
+title: "qpc"
+output: html_document
+---
+
+```{r}
+library(qpc)
+library(dplyr)
+library(tidyr)
+library(PKPDmisc)
+qpc <- qpc(rdata = read.csv("~/Downloads/data1.csv"), 
+           simdata = dplyr::as_data_frame(data.table::fread("~/Downloads/qpcsim.csv")))
+
+pauc(qpc) <- list(c(0,2), c(2, 12))
+
+pauc(qpc)
+
+names(qpc$simdata)
+
+names(qpc$rdata)
+
+qpc <- calculate_paucs(qpc,"TIME", "DV", id = "ID", rep = "REP")
+
+calculate_quantiles.qpc
+# 
+# plot(qpc)
+qpc
+```
+
