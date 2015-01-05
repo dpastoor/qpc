@@ -9,6 +9,7 @@ calculate_paucs <- function(x,
 }
 
 #' calculate partial aucs for those defined in pauc
+#' @export
 calculate_paucs.qpc <- function(x,
                                 rdv_time, 
                                 rdv,
@@ -86,6 +87,9 @@ calculate_quantiles.qpc <- function(x,
                                                                     na.rm)
     }
 
+  }
+  if(!is.null(x$tp)) {
+     #TODO: add single time points
   }
 
   return(x)
