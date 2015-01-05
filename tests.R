@@ -31,3 +31,21 @@ grp <- function(df, gp) {
 }
 
 qpc2$simdata %>% grp("REP")
+
+
+qpc <- qpc(rdata = read.csv("~/Downloads/data1.csv"), 
+           simdata = dplyr::as_data_frame(data.table::fread("~/Downloads/qpcsim.csv")))
+
+pauc(qpc) <- list(c(0,2), c(2, 12))
+
+pauc(qpc)
+
+names(qpc$simdata)
+
+names(qpc$rdata)
+
+qpc <- calculate_paucs(qpc,"TIME", "DV", id = "ID", rep = "REP")
+
+qpc <- calculate_quantiles(qpc, probs = c(0.25, 0.5, 0.75))
+
+plot(qpc)
