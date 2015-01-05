@@ -13,5 +13,6 @@ Imports:
     ggplot2,
     PKPDmisc,
     dplyr,
-    lazyeval
+    lazyeval,
+    tidyr
 License: MIT

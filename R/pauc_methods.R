@@ -2,6 +2,7 @@ pauc <- function(x){
   UseMethod("pauc", x)
 }
 
+#' @export
 pauc.qpc <- function(x) x[['pauc']]
 
 'pauc<-' <- function(x, value) {
@@ -17,6 +18,7 @@ pauc.qpc <- function(x) x[['pauc']]
   UseMethod('add_pauc<-', x)
 }
 
+#' @export
 'add_pauc.qpc' <- function(x, value) {
   if(!is.list(value)) {
     warning("For more than one pauc, must be a list, coercing to list.")
@@ -31,7 +33,8 @@ pauc.qpc <- function(x) x[['pauc']]
   UseMethod('remove_pauc<-', x)
 }
 
-
+#' remove pauc
+#' @export
 'remove_pauc<-.qpc' <- function(x, value) {
   if(!is.list(value)) {
     warning("For more than one pauc, must be a list, coercing to list.")
