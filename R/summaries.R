@@ -27,14 +27,14 @@ calculate_paucs.qpc <- function(x,
   grdat <- dplyr::group_by_(x$rdata, .dots = 
                                 list(lazyeval::interp(id,
                                                       id = as.name(id))))
-  x[['rdata_pauc']] <- PKPDmisc::s_pauc(grdat, rdv_time, rdv, x$pauc)
+  x[['rdata_pauc']] <- PKPDmisc::s_pauc_(grdat, rdv_time, rdv, x$pauc)
   gsimdat <- dplyr::group_by_(x$simdata, .dots = 
                                 list(lazyeval::interp(id,
                                                       id = as.name(id)),
                                      lazyeval::interp(rep,
                                                       rep = as.name(rep))
                               ))
-  x[['simdata_pauc']] <- PKPDmisc::s_pauc(gsimdat, sdv_time, sdv, x$pauc)
+  x[['simdata_pauc']] <- PKPDmisc::s_pauc_(gsimdat, sdv_time, sdv, x$pauc)
     return(x)
 }
 

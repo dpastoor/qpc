@@ -17,7 +17,7 @@ plot.qpc <- function(x) {
     
     summary <- dplyr::inner_join(gather(sq1[[1]], key, value, -REP), rvalue)
     p <- summary %>% ggplot(aes(x = value, group = key)) +geom_histogram(color = "black", fill="white") +
-      facet_wrap(~key, scales="free") + PKPDmisc::base_theme_obs() + geom_vline(aes(xintercept = rvalue), color = "red", size = 2) +
+      facet_wrap(~key, scales="free") + PKPDmisc::base_theme() + geom_vline(aes(xintercept = rvalue), color = "red", size = 2) +
       xlab(names(rq1))
     print(p)
     return(p)
