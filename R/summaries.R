@@ -72,7 +72,7 @@ calculate_quantiles.qpc <- function(x,
     for(i in seq_along(pauc_cols)) {
       pauc_name <- pauc_cols[i]
       # ungroup to make sure no grouping vars passed in
-      x[['r_pauc_quantiles']][[pauc_name]] <- PKPDmisc::s_quantiles(dplyr::ungroup(x$rdata_pauc), 
+      x[['r_pauc_quantiles']][[pauc_name]] <- PKPDmisc::s_quantiles_(dplyr::ungroup(x$rdata_pauc), 
                                                                   pauc_name, 
                                                                   probs, 
                                                                   na.rm)
@@ -84,7 +84,7 @@ calculate_quantiles.qpc <- function(x,
       gsimdat_pauc <- dplyr::group_by_(x$simdata_pauc, .dots = 
                                     list(lazyeval::interp(rep,
                                                           rep = as.name(rep))))
-      x[['s_pauc_quantiles']][[pauc_name]] <- PKPDmisc::s_quantiles(gsimdat_pauc, 
+      x[['s_pauc_quantiles']][[pauc_name]] <- PKPDmisc::s_quantiles_(gsimdat_pauc, 
                                                                     pauc_name, 
                                                                     probs, 
                                                                     na.rm)
