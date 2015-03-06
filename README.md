@@ -10,7 +10,7 @@ This package provides the functions related to performing quantitative predictiv
 
 based on publication [A new equivalence based metric for predictive check to qualify mixed effects models](http://www.ncbi.nlm.nih.gov/pubmed/16353930)
 
-A QPC can be performed on any test statistic, however initial implementation will focus on AUC (area-under-the-curve) and single time-point comparisons.
+A QPC can be performed on any test statistic, however initial implementation will focus on AUC (area-under-the-curve).
 
 A high level conceptualization of the overall workflow/api is as such:
 
