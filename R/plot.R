@@ -14,7 +14,7 @@ plot.qpc <- function(x) {
     rq1 <- rdata_quantiles[i]
     sq1 <- sdata_quantiles[i]
     rvalue <- data.frame(key = names(rq1[[1]]), rvalue = rq1[[1]])
-    summary <- dplyr::inner_join(gather(sq1[[1]], key, value, -REP), rvalue)
+    summary <- dplyr::inner_join(tidyr::gather(sq1[[1]], key, value, -REP), rvalue)
     p <- summary %>% ggplot(aes(x = value, group = key)) +geom_histogram(color = "black", fill="white") +
       facet_wrap(~key, scales="free") + PKPDmisc::base_theme() + geom_vline(aes(xintercept = rvalue), color = "red", size = 2) +
       xlab(names(rq1))
