@@ -1,0 +1,38 @@
+---
+title: "Vignette Title"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r}
+library(qpc)
+library(dplyr)
+library(PKPDmisc)
+data(obs_data1)
+data(sim_data1)
+qpc <- qpc(rdata = obs_data1, 
+           simdata = sim_data1)
+
+#set partial auc values you are interested in
+pauc(qpc) <- list(c(0,2), c(2, 12), c(0,8))
+
+# calculate the partial AUC's
+qpc <- calculate_paucs(qpc,"TIME", "DV", id = "ID", rep = "REP")
+
+# calculate the quantiles for each pauc
+qpc <- calculate_quantiles(qpc, probs = c(0.25, 0.5, 0.8))
+# 
+# plot(qpc)
+plot(qpc)
+
+# capture plots to edit
+qpc_plots <- plot(qpc)
+
+# eg in the first plot want to change the x axis
+qpc_plots[[1]] + xlab("Partial AUC 0 to 2 hrs")
+```
