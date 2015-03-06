@@ -1,6 +1,6 @@
 ---
-title: "Vignette Title"
-author: "Vignette Author"
+title: "Basic QPC Example"
+author: "Devin Pastoor"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -8,8 +8,11 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
-
 ```{r}
+knitr::opts_chunk$set(fig.width = 7)
+```
+
+```{r }
 library(qpc)
 library(dplyr)
 library(PKPDmisc)
@@ -25,14 +28,17 @@ pauc(qpc) <- list(c(0,2), c(2, 12), c(0,8))
 qpc <- calculate_paucs(qpc,"TIME", "DV", id = "ID", rep = "REP")
 
 # calculate the quantiles for each pauc
-qpc <- calculate_quantiles(qpc, probs = c(0.25, 0.5, 0.8))
+qpc <- calculate_quantiles(qpc, probs = c(0.25, 0.5, 0.75))
 # 
-# plot(qpc)
-plot(qpc)
 
-# capture plots to edit
+# capture plots to edit, else just call plot(qpc) directly
 qpc_plots <- plot(qpc)
 
 # eg in the first plot want to change the x axis
 qpc_plots[[1]] + xlab("Partial AUC 0 to 2 hrs")
 ```
+
+```{r}
+devtools::session_info()
+```
+
